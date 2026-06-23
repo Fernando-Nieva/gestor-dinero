@@ -1,11 +1,10 @@
 services:
   - type: web
     name: gestor-dinero
-    runtime: php
+    runtime: docker
     repo: https://github.com/Fernando-Nieva/gestor-dinero
     branch: develop
-    buildCommand: composer install --optimize-autoloader --no-dev
-    startCommand: bash startup.sh
+    dockerfilePath: Dockerfile
     envVars:
       - key: APP_ENV
         value: production
@@ -43,6 +42,8 @@ services:
         value: sync
       - key: CACHE_STORE
         value: database
+      - key: PORT
+        value: "8000"
 
 databases:
   - name: gestor-dinero-db

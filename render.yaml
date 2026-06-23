@@ -1,0 +1,51 @@
+services:
+  - type: web
+    name: gestor-dinero
+    runtime: php
+    repo: https://github.com/Fernando-Nieva/gestor-dinero
+    branch: develop
+    buildCommand: composer install --optimize-autoloader --no-dev
+    startCommand: bash startup.sh
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        value: base64:cAO/rl9DH1x+1v02nr0TzxpjI+788W7R0qy9DoKjAMs=
+      - key: APP_URL
+        value: https://gestor-dinero.onrender.com
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_DATABASE
+        fromDatabase:
+          name: gestor-dinero-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: gestor-dinero-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: gestor-dinero-db
+          property: password
+      - key: DB_HOST
+        fromDatabase:
+          name: gestor-dinero-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: gestor-dinero-db
+          property: port
+      - key: SESSION_DRIVER
+        value: database
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: CACHE_STORE
+        value: database
+
+databases:
+  - name: gestor-dinero-db
+    databaseName: gestor_dinero
+    user: gestor_dinero_user
+    plan: free

@@ -67,7 +67,7 @@ class DashboardController extends Controller
             ->orderBy('mes')
             ->get();
 
-        $labelsMeses = $mesesRaw->map(fn($r) => \Carbon\Carbon::create()->month($r->mes)->translatedFormat('M Y'))->toArray();
+        $labelsMeses = $mesesRaw->map(fn($r) => \Carbon\Carbon::create()->month((int) $r->mes)translatedFormat('M Y'))->toArray();
 
         $ingresosPorMes = (clone $query)
             ->where('tipo', 'ingreso')

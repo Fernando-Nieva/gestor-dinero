@@ -29,5 +29,11 @@ class DatabaseSeeder extends Seeder
 
         $movs = [[1,"2026-06-02","ingreso",350000.00,8,28,null],[2,"2026-06-05","ingreso",25000.00,8,29,null],[3,"2026-06-10","ingreso",12000.00,8,30,null],[4,"2026-06-15","ingreso",8000.00,9,31,null],[5,"2026-06-20","ingreso",5000.00,9,33,null],[6,"2026-06-03","egreso",80000.00,3,9,null],[7,"2026-06-04","egreso",45000.00,1,1,null],[8,"2026-06-07","egreso",12000.00,3,10,null],[9,"2026-06-08","egreso",8500.00,7,25,null],[10,"2026-06-12","egreso",15000.00,2,5,null],[11,"2026-06-14","egreso",5500.00,4,14,null],[12,"2026-06-19","egreso",5000.00,5,21,null],[13,"2026-06-05","ahorro",20000.00,null,null,2],[14,"2026-06-15","ahorro",10000.00,null,null,1],[15,"2026-06-20","ahorro",15000.00,null,null,null],[16,"2026-06-21","ahorro",20000.00,10,38,1],[17,"2026-06-21","ahorro",300000.00,10,38,1]];
         foreach($movs as [$id,$f,$t,$m,$cid,$sid,$mid]){ DB::table("movimientos")->updateOrInsert(["id"=>$id],["user_id"=>4,"fecha"=>$f,"tipo"=>$t,"monto"=>$m,"categoria_id"=>$cid,"subcategoria_id"=>$sid,"meta_ahorro_id"=>$mid]); }
+
+        DB::statement("SELECT setval('movimientos_id_seq', (SELECT MAX(id) FROM movimientos))");
+        DB::statement("SELECT setval('categorias_id_seq', (SELECT MAX(id) FROM categorias))");
+        DB::statement("SELECT setval('subcategorias_id_seq', (SELECT MAX(id) FROM subcategorias))");
+        DB::statement("SELECT setval('metas_ahorro_id_seq', (SELECT MAX(id) FROM metas_ahorro))");
+        DB::statement("SELECT setval('presupuestos_id_seq', (SELECT MAX(id) FROM presupuestos))");
     }
 }

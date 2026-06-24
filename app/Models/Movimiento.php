@@ -39,10 +39,7 @@ class Movimiento extends Model
     	return $this->belongsTo(Subcategoria::class);
     }
 
-    public function metaAhorro()
-    {
-        return $this->belongsTo(MetaAhorro::class);
-    }
+    
 
 
 }
